@@ -7,6 +7,7 @@ import numpy as np
 coffeebar_df = pd.read_csv('../Data/Coffeebar_2016-2020.csv', sep=';')
 print(coffeebar_df.head(5))
 
+
 #all food types served, dropped NaN
 print(coffeebar_df["FOOD"].dropna().unique())
 
