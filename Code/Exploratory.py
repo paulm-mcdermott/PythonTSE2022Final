@@ -46,3 +46,6 @@ print(coffeebar_df[['TIMESTAMP','FOOD']].groupby('TIMESTAMP').value_counts())
 
 
 
+
+
+
