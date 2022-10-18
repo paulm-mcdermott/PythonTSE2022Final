@@ -1,5 +1,5 @@
 import pandas as pd
-import datetime
+import datetime as dt
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -10,8 +10,8 @@ print(coffeebar_df.head(5))
 #all food types served, dropped NaN
 print(coffeebar_df["FOOD"].dropna().unique())
 
-# all drinks types served, dropped NaN
-print(coffeebar_df["DRINKS"].dropna().unique())
+# all drinks types served, always order drink so no dropna
+print(coffeebar_df["DRINKS"].unique())
 
 # count unique customer ids
 print(len(coffeebar_df["CUSTOMER"].unique()))
@@ -29,3 +29,20 @@ plt.show()
 # TO DO: more cool plots
 
 # TO DO: part 1 last bullet
+# convert time to date time for easier extraction of timestamp
+coffeebar_df['DATETIME'] = pd.to_datetime(coffeebar_df['TIME'])
+print(coffeebar_df['DATETIME'])
+
+# add column that is just the time stamp
+coffeebar_df['TIMESTAMP'] = coffeebar_df['DATETIME'].dt.time
+print(coffeebar_df['TIMESTAMP'])
+
+# get food counts for each timestamp
+print(coffeebar_df[['TIMESTAMP','FOOD']].groupby('TIMESTAMP').value_counts())
+
+
+
+
+
+
+
