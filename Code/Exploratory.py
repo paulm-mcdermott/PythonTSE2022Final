@@ -2,9 +2,12 @@ import pandas as pd
 import datetime as dt
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 # load csv into dataframe
-coffeebar_df = pd.read_csv('../Data/Coffeebar_2016-2020.csv', sep=';')
+inputfile1 = os.path.abspath('../exam-mcdermott-standish-white/Data/Coffeebar_2016-2020.csv')
+# NOTE had to modify to work on mine, should be generalisable but pls check
+coffeebar_df = pd.read_csv(inputfile1, sep=';')
 print(coffeebar_df.head(5))
 
 
