@@ -24,6 +24,7 @@ print(len(coffeebar_df["CUSTOMER"].unique()))
 coffeebar_df['YEAR'] = pd.DatetimeIndex(coffeebar_df['TIME']).year
 
 
+
 # bar chart for food order frequency
 # TO DO: make it prettier, find better solution than plt.show()
 coffeebar_df["FOOD"].value_counts().plot.bar()
@@ -58,6 +59,8 @@ plt.show()
 
 # TO DO: more cool plots
 
+
+# PAUL APPROACH
 # TO DO: part 1 last bullet
 # convert time to date time for easier extraction of timestamp
 coffeebar_df['DATETIME'] = pd.to_datetime(coffeebar_df['TIME'])
@@ -71,6 +74,9 @@ print(coffeebar_df['TIMESTAMP'])
 print(coffeebar_df[['TIMESTAMP','FOOD']].groupby('TIMESTAMP').value_counts())
 
 
+# JUSTIN APPROACH
+ct_time_food = pd.crosstab(coffeebar_df['TIMESTAMP'], coffeebar_df['FOOD'])
+ct_time_food
 
 
 
