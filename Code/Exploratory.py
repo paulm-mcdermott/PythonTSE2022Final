@@ -75,27 +75,52 @@ print(coffeebar_df[['TIMESTAMP','FOOD']].groupby('TIMESTAMP').value_counts())
 
 
 # JUSTIN APPROACH
-print(coffeebar_df['FOOD'].tail(10))
-coffeebar_df['FOOD'] = coffeebar_df['FOOD'].fillna("None")
-print(coffeebar_df['FOOD'].tail(10))
+# FOOD
+# Change Nan's to 'None' so they show up in the crosstab
 
+print(coffeebar_df['FOOD'].tail(10))
+coffeebar_df['FOOD'] = coffeebar_df['FOOD'].fillna("none")
+print(coffeebar_df['FOOD'].tail(10))
 
 ct_time_food = pd.crosstab(coffeebar_df['TIMESTAMP'], coffeebar_df['FOOD'], normalize = 'index')*100
 print(ct_time_food)
-
-
-# stacked bar chart for frequency
+ct_time_food.to_csv('Results/FoodDist.csv')
 
 ct_time_food.plot(kind="bar", stacked = True, rot=0)
-plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%H:%M') )
-plt.gca().xaxis.set_major_locator(mdates.MinuteLocator(byminute=range(0,60,15)))
 
-plt.ylabel('Percentage of Sales')
+x_ticks = [     0,     12,     24,       36,      66,      96,      111,    126,     141,    156,        171]
+x_labels = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
+plt.xticks(ticks=x_ticks, labels=x_labels)
+plt.ylabel('Percentage of Food Sales')
+plt.xlabel('Time')
 plt.title('Distribution of Food Sales over Time')
-plt.show()
+plt.legend(title='Food Type', loc='lower right')
 
+plt.gcf().set_size_inches(9,6)
+plt.savefig('Results/FoodDist.png', dpi=300)
 
+#plt.show()
 
+# Drinks
+
+ct_time_drinks = pd.crosstab(coffeebar_df['TIMESTAMP'], coffeebar_df['DRINKS'], normalize = 'index')*100
+print(ct_time_drinks)
+ct_time_food.to_csv('Results/DrinksDist.csv')
+
+ct_time_drinks.plot(kind="bar", stacked = True, rot=0)
+
+x_ticks = [     0,     12,     24,       36,      66,      96,      111,    126,     141,    156,        171]
+x_labels = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
+plt.xticks(ticks=x_ticks, labels=x_labels)
+plt.ylabel('Percentage of Drinks Sales')
+plt.xlabel('Time')
+plt.title('Distribution of Drinks Sales over Time')
+plt.legend(title='Drink Type', loc='lower right')
+
+plt.gcf().set_size_inches(9,6)
+plt.savefig('Results/DrinksDist.png', dpi=300)
+
+#plt.show()
 
 
 
