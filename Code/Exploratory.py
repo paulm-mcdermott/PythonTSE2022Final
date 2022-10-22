@@ -25,37 +25,29 @@ print(len(coffeebar_df["CUSTOMER"].unique()))
 coffeebar_df['YEAR'] = pd.DatetimeIndex(coffeebar_df['TIME']).year
 
 
-
 # bar chart for food order frequency
-# TO DO: make it prettier, find better solution than plt.show()
-coffeebar_df["FOOD"].value_counts().plot.bar()
-plt.show()
 
-# stacked bar chart for frequency
 ct_food = pd.crosstab(coffeebar_df['FOOD'], coffeebar_df['YEAR'])
 
 ct_food.plot(kind="bar", stacked = True, rot=0)
 plt.ylabel('Quantity Sold')
-plt.title('Quantity of Food Sold by Year')
-plt.show()
+plt.xlabel('Food')
+plt.title('Quantity of Food Sold, 2016-2020')
+plt.gcf().set_size_inches(9,6)
+plt.savefig('Results/FoodFreq.png', dpi=300)
+#plt.show()
 
 # bar chart for drink order frequency
-# TO DO: make it prettier, find better solution than plt.show()
-coffeebar_df["DRINKS"].value_counts().plot.bar()
-plt.ylabel('Quantity Sold')
-plt.title('Quantity of Drinks Sold, 20XX-XX')
-plt.show()
-# plt.savefig('../Results/Drinks_totals.png')
 
-
-
-# stacked bar chart for frequency
 ct_drinks = pd.crosstab(coffeebar_df['DRINKS'], coffeebar_df['YEAR'])
 
 ct_drinks.plot(kind="bar", stacked = True, rot=0)
 plt.ylabel('Quantity Sold')
+plt.xlabel('Drinks')
 plt.title('Quantity of Drinks Sold by Year')
-plt.show()
+plt.gcf().set_size_inches(9,6)
+plt.savefig('Results/DrinksFreq.png', dpi=300)
+#plt.show()
 
 
 # TO DO: more cool plots
