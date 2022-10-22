@@ -1,6 +1,7 @@
 import pandas as pd
 import datetime as dt
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import numpy as np
 import os
 
@@ -59,7 +60,6 @@ plt.show()
 
 # TO DO: more cool plots
 
-
 # PAUL APPROACH
 # TO DO: part 1 last bullet
 # convert time to date time for easier extraction of timestamp
@@ -75,8 +75,24 @@ print(coffeebar_df[['TIMESTAMP','FOOD']].groupby('TIMESTAMP').value_counts())
 
 
 # JUSTIN APPROACH
-ct_time_food = pd.crosstab(coffeebar_df['TIMESTAMP'], coffeebar_df['FOOD'])
-ct_time_food
+print(coffeebar_df['FOOD'].tail(10))
+coffeebar_df['FOOD'] = coffeebar_df['FOOD'].fillna("None")
+print(coffeebar_df['FOOD'].tail(10))
+
+
+ct_time_food = pd.crosstab(coffeebar_df['TIMESTAMP'], coffeebar_df['FOOD'], normalize = 'index')*100
+print(ct_time_food)
+
+
+# stacked bar chart for frequency
+
+ct_time_food.plot(kind="bar", stacked = True, rot=0)
+plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%H:%M') )
+plt.gca().xaxis.set_major_locator(mdates.MinuteLocator(byminute=range(0,60,15)))
+
+plt.ylabel('Percentage of Sales')
+plt.title('Distribution of Food Sales over Time')
+plt.show()
 
 
 
