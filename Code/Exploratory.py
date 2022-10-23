@@ -8,6 +8,7 @@ import os
 # load csv into dataframe
 coffeebar_df = pd.read_csv('./Data/Coffeebar_2016-2020.csv', sep=';')
 
+
 print(coffeebar_df.head(5))
 
 
