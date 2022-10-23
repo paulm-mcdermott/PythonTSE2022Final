@@ -6,9 +6,8 @@ import numpy as np
 import os
 
 # load csv into dataframe
-inputfile1 = os.path.abspath('../exam-mcdermott-standish-white/Data/Coffeebar_2016-2020.csv')
-# NOTE had to modify to work on mine, should be generalisable but pls check
-coffeebar_df = pd.read_csv(inputfile1, sep=';')
+coffeebar_df = pd.read_csv('./Data/Coffeebar_2016-2020.csv', sep=';')
+
 print(coffeebar_df.head(5))
 
 
@@ -35,7 +34,7 @@ plt.xlabel('Food')
 plt.title('Quantity of Food Sold, 2016-2020')
 plt.gcf().set_size_inches(9,6)
 plt.savefig('Results/FoodFreq.png', dpi=300)
-#plt.show()
+plt.show()
 
 # bar chart for drink order frequency
 
@@ -44,10 +43,10 @@ ct_drinks = pd.crosstab(coffeebar_df['DRINKS'], coffeebar_df['YEAR'])
 ct_drinks.plot(kind="bar", stacked = True, rot=0)
 plt.ylabel('Quantity Sold')
 plt.xlabel('Drinks')
-plt.title('Quantity of Drinks Sold by Year')
+plt.title('Quantity of Drinks Sold, 2016-2020')
 plt.gcf().set_size_inches(9,6)
 plt.savefig('Results/DrinksFreq.png', dpi=300)
-#plt.show()
+plt.show()
 
 
 # TO DO: more cool plots
@@ -91,7 +90,7 @@ plt.legend(title='Food Type', loc='lower right')
 plt.gcf().set_size_inches(9,6)
 plt.savefig('Results/FoodDist.png', dpi=300)
 
-#plt.show()
+plt.show()
 
 # Drinks
 
@@ -112,7 +111,7 @@ plt.legend(title='Drink Type', loc='lower right')
 plt.gcf().set_size_inches(9,6)
 plt.savefig('Results/DrinksDist.png', dpi=300)
 
-#plt.show()
+plt.show()
 
 
 
