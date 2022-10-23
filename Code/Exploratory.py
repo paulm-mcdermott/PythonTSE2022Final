@@ -8,6 +8,7 @@ import os
 # load csv into dataframe
 inputfile1 = os.path.abspath('../exam-mcdermott-standish-white/Data/Coffeebar_2016-2020.csv')
 # NOTE had to modify to work on mine, should be generalisable but pls check
+# Uh oh, doesn't work on mine TODO: Figure this out
 coffeebar_df = pd.read_csv(inputfile1, sep=';')
 print(coffeebar_df.head(5))
 
