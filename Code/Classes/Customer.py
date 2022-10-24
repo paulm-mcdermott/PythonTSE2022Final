@@ -5,10 +5,10 @@ class Customer(object):
 
     # this needs to check budget and block if needed
     # return false if can't, return tip if can (tip can be 0)
-    def add_transaction(self, cost):
-        if self.budget < cost:
-            return False
-        # TODO: add rest of logic (else)
+    # since we're automatically removing those with insufficient budget
+    # we don't have to worry about checking budget
+    def update_budget(self, transaction_cost):
+        self.budget = self.budget - transaction_cost
 
 
 class OneTimeCustomer(Customer):
