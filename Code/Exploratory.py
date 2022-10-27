@@ -77,6 +77,10 @@ print(coffeebar_df['FOOD'].tail(10))
 ct_time_food = pd.crosstab(coffeebar_df['TIMESTAMP'], coffeebar_df['FOOD'], normalize = 'index')*100
 print(ct_time_food)
 ct_time_food.to_csv('Results/FoodDist.csv')
+# Observed probabilities:
+# 8-11: 100% none
+# 11-13: 12.5% cookie muffin pie, 62.5% sandwich
+# 13-18: 13.33% (4/30) cookie muffin pie. 60% none
 
 ct_time_food.plot(kind="bar", stacked = True, rot=0)
 
@@ -97,7 +101,11 @@ plt.show()
 
 ct_time_drinks = pd.crosstab(coffeebar_df['TIMESTAMP'], coffeebar_df['DRINKS'], normalize = 'index')*100
 print(ct_time_drinks)
-ct_time_food.to_csv('Results/DrinksDist.csv')
+ct_time_drinks.to_csv('Results/DrinksDist.csv')
+# Observed probabilities:
+# 8-11: coffee 1/3, everything else 2/15
+# 11-13: soda = 7/12, everything else 1/12
+# 13-18: all drinks 16.66% (1/6)
 
 ct_time_drinks.plot(kind="bar", stacked = True, rot=0)
 
