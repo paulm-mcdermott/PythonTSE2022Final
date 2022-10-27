@@ -51,3 +51,8 @@ while timedelta < dt.timedelta(hours = 18):
 # CSV's to check
 food_prob.to_csv('Results/Food_Prob.csv')
 drinks_prob.to_csv('Results/Drinks_Prob.csv')
+
+# Prices menus
+
+food_menu = pd.DataFrame( [2, 3, 3, 2, 0], columns = ['Price'], index=['Cookie', 'Muffin', 'Pie', 'Sandwich', 'None'])
+drinks_menu = pd.DataFrame( [3, 4, 5, 3, 3, 2], columns = ['Price'], index=['Coffee', 'Frappucino', 'Milkshake', 'Soda', 'Tea', 'Water'])
