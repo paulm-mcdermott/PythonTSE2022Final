@@ -1,6 +1,5 @@
 from Classes.Store import Store
 from Classes.Customer import Customer
-import random
 
 
 def minute_of_business(time, store):
@@ -14,8 +13,8 @@ def minute_of_business(time, store):
         drink_choice = store.pick_drink(hour)
 
         # determine prices and total cost of transaction for customer
-        food_price = store.food_menu.at[food_choice, "price"]
-        drink_price = store.food_menu.at[drink_choice, "price"]
+        food_price = store.food_menu.loc[store.food_menu['food_item'] == food_choice, "price"]
+        drink_price = store.drink_menu.loc[store.drink_menu['drink_item'] == drink_choice, "price"]
         tip = customer.determine_tip()
         total_cost = food_price + drink_price + tip
 
