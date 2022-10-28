@@ -1,3 +1,6 @@
+import random
+
+
 class Customer(object):
     def __init__(self, customer_id, budget):
         self.customer_id = customer_id
@@ -9,6 +12,12 @@ class Customer(object):
     # we don't have to worry about checking budget
     def update_budget(self, transaction_cost):
         self.budget = self.budget - transaction_cost
+
+    def determine_tip(self):
+        tip = 0
+        if isinstance(self, TripAdvisorCustomer):
+            tip = random.randint(1, 10)
+        return tip
 
 
 class OneTimeCustomer(Customer):
