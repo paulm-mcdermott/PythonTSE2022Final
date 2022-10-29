@@ -25,7 +25,7 @@ def minute_of_business(date_time, store):
         customer.update_budget(total_cost)
 
         # format store ledger entry
-        transaction = [date_time.strftime(format='%d/%m/%Y, %H:%M:%S'), customer.customer_id, food_choice, drink_choice,
+        transaction = [date_time.strftime('%d/%m/%Y, %H:%M:%S'), customer.customer_id, food_choice, drink_choice,
                        total_cost, tip]
 
         # add transaction to store ledger

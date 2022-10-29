@@ -37,7 +37,6 @@ class ReturningCustomer(Customer):
         super().__init__(customer_id, 250)
 
 
-
 class HipsterCustomer(ReturningCustomer):
     def __init__(self, customer_id):
         super().__init__(customer_id)
