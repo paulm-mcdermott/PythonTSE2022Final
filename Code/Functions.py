@@ -1,6 +1,6 @@
 from Classes.Store import Store
 from Classes.Customer import Customer
-import pandas
+import pandas as pd
 
 
 def minute_of_business(date_time, store):
