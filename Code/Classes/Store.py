@@ -6,25 +6,29 @@ from Classes.Customer import OneTimeCustomer, TripAdvisorCustomer
 
 class Store(object):
 
-    def __init__(self, food_menu, drink_menu, ret_cust_list, p_cust=.7, p_returning=.2, p_ta_customer=0.1):
+    # store constructor, note the fact that the probabilities have default that can be overrided
+    def __init__(self, food_menu, drink_menu, ret_cust_list, prob_cust=.7, prob_returning=.2, prob_ta_customer=0.1):
         # TODO: specify types (menus should be dataframes), ret_cust_list is list of ids
         self.food_menu = food_menu
         self.drink_menu = drink_menu
         self.viable_ret_cust = ret_cust_list
         self.ledger = []
         self.walk_ins = []
-        self.p_cust = p_cust
-        self.p_returning = p_returning
-        self.p_ta_customer = p_ta_customer
+        self.prob_cust = prob_cust
+        self.prob_returning = prob_returning
+        self.prob_ta_customer = prob_ta_customer
 
+    # adds transaction, a parameter meant to be a list, onto the ledger
     def add_to_ledger(self, transaction):
         self.ledger.append(transaction)
 
+    # retrieves ledger in dataframe form
     def retrieve_ledger(self):
         return pd.DataFrame.from_records(self.ledger,
                                          columns=['date_time', 'customer_id', 'food_choice', 'drink_choice',
                                                   'transaction_value', 'tip'])
 
+    # removing from returning customer pool
     def remove_returning_customer(self, customer):
         self.viable_ret_cust.remove(customer)
 
@@ -41,7 +45,7 @@ class Store(object):
     # then what type. Returns the corresponding customer object, or nothing in no entry
     def customer_entry(self):
         minute_draw = random.uniform(0, 1)
-        if minute_draw < self.p_cust:
+        if minute_draw < self.prob_cust:
             return self.pick_customer_type()
         else:
             return None
@@ -50,11 +54,11 @@ class Store(object):
     # and returns that corresponding customer object
     def pick_customer_type(self):
         type_cust = random.uniform(0, 1)
-        if type_cust < self.p_returning:
+        if type_cust < self.prob_returning:
             return self.pick_returning_customer()
         else:
             p_walk_in_type = random.uniform(0, 1)
-            if p_walk_in_type <= self.p_ta_customer:
+            if p_walk_in_type <= self.prob_ta_customer:
                 wi_customer = TripAdvisorCustomer("TA" + str(len(self.walk_ins) + 1))
             else:
                 wi_customer = OneTimeCustomer("OT" + str(len(self.walk_ins) + 1))
@@ -74,6 +78,7 @@ class Store(object):
         else:
             return np.random.choice(list(self.food_menu["food_item"]), 1, p=list(self.food_menu["dinner_prob"]))[0]
 
+    # picks a food item based on the hour of day, according to probabilities in drink_menu
     def pick_drink(self, hour):
         if hour < 11:
             return np.random.choice(list(self.drink_menu["drink_item"]), 1, p=list(self.drink_menu["breakfast_prob"]))[
