@@ -1,8 +1,8 @@
-from Customer import OneTimeCustomer, TripAdvisorCustomer
+
 import random
 import numpy as np
 import pandas as pd
-from Customer import Customer, OneTimeCustomer, TripAdvisorCustomer
+from Customer import OneTimeCustomer, TripAdvisorCustomer
 
 
 # store needs a ledger for part 3, so
@@ -16,6 +16,7 @@ class Store(object):
         self.drink_menu = drink_menu
         self.viable_ret_cust = ret_cust_list
         self.ledger = []
+        self.walk_ins = []
 
     def add_to_ledger(self, transaction):
         self.ledger.append(transaction)
@@ -56,9 +57,10 @@ class Store(object):
             p_ta_customer = 0.1
             p_walk_in_type = random.uniform(0, 1)
             if p_walk_in_type <= p_ta_customer:
-                wi_customer = TripAdvisorCustomer()
+                wi_customer = TripAdvisorCustomer("TA"+str(len(self.walk_ins) + 1))
             else:
-                wi_customer = OneTimeCustomer()
+                wi_customer = OneTimeCustomer("OT"+str(len(self.walk_ins) + 1))
+            self.walk_ins.append(wi_customer)
             return wi_customer
 
     # randomly picks from the pool of viable returning customers
