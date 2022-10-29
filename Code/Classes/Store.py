@@ -2,6 +2,7 @@ from Customer import OneTimeCustomer, TripAdvisorCustomer
 import random
 import numpy as np
 import pandas as pd
+from Customer import Customer, OneTimeCustomer, TripAdvisorCustomer
 
 
 # store needs a ledger for part 3, so
