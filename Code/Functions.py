@@ -30,6 +30,7 @@ def minute_of_business(date_time, store):
 
         # add transaction to store ledger
         store.add_to_ledger(transaction)
+        customer.add_to_history(transaction)
 
         # if customer's updated budget is insufficient, then remove from store ledger
         # don't have to worry about customer type due to size of budget for one time customers

@@ -5,6 +5,7 @@ class Customer(object):
     def __init__(self, customer_id, budget):
         self.customer_id = customer_id
         self.budget = budget
+        self.purchase_history = []
 
     # this needs to check budget and block if needed, return false if can't, return tip if can (tip can be 0)
     # since we're automatically removing those with insufficient budget we don't have to worry about checking budget
@@ -16,6 +17,9 @@ class Customer(object):
         if isinstance(self, TripAdvisorCustomer):
             tip = random.randint(1, 10)
         return tip
+
+    def add_to_history(self, transaction):
+        self.purchase_history.append(transaction)
 
 
 class OneTimeCustomer(Customer):
@@ -31,6 +35,7 @@ class TripAdvisorCustomer(OneTimeCustomer):
 class ReturningCustomer(Customer):
     def __init__(self, customer_id):
         super().__init__(customer_id, 250)
+
 
 
 class HipsterCustomer(ReturningCustomer):
