@@ -1,6 +1,7 @@
 from Customer import OneTimeCustomer, TripAdvisorCustomer
 import random
 import numpy as np
+import pandas as pd
 
 
 # store needs a ledger for part 3, so
@@ -17,6 +18,9 @@ class Store(object):
 
     def add_to_ledger(self, transaction):
         self.ledger.append(transaction)
+
+    def retrieve_ledger(self):
+        return pd.DataFrame.from_records(self.ledger,columns=['date_time','customer_id','food_choice','drink_choice','transaction_value','tip'])
 
     def remove_returning_customer(self, customer_id):
         self.viable_ret_cust.remove(customer_id)
@@ -63,16 +67,18 @@ class Store(object):
     # picks a food item based on the hour of day, according to probabilities in food_menu
     def pick_food(self, hour):
         if hour < 11:
-            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["breakfast_probability"])
+            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["breakfast_prob"])
         elif (hour >= 11) & (hour < 13):
-            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["lunch_probability"])
+            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["lunch_prob"])
         else:
-            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["dinner_probability"])
+            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["dinner_prob"])
 
     def pick_drink(self, hour):
         if hour < 11:
-            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["breakfast_probability"])
+            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["breakfast_prob"])
         elif (hour >= 11) & (hour < 13):
-            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["lunch_probability"])
+            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["lunch_prob"])
         else:
-            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["dinner_probability"])
+            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["dinner_prob"])
+
+
