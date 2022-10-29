@@ -7,11 +7,11 @@ import os
 
 # Setting up database of times with menu probabilities
 
-food_menu = pd.DataFrame([['Cookie', 2, 0, 1/8, 4/30],
-                          ['Muffin', 3,0,1/8,4/30],
-                          ['Pie', 3,0,1/8,4/30],
-                          ['Sandwich',2,0,5/8,0],
-                          ['None', 0,1,0,3/5]],
+food_menu = pd.DataFrame([['Cookie',   2, 0, 1/8, 4/30],
+                          ['Muffin',   3, 0, 1/8, 4/30],
+                          ['Pie',      3, 0, 1/8, 4/30],
+                          ['Sandwich', 2, 0, 5/8, 0],
+                          ['None',     0, 1, 0,   3/5]],
                          columns=['food_item', 'price', 'breakfast_prob', 'lunch_prob', 'dinner_prob'],
                          )
 
