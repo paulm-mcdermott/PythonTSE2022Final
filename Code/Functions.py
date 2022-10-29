@@ -1,10 +1,11 @@
 from Classes.Store import Store
 from Classes.Customer import Customer
 import pandas as pd
+import datetime as dt
 
 
 def minute_of_business(date_time, store):
-    hour = get_hour(date_time)
+    hour = date_time.hour
     customer = store.customer_entry()
     if customer is None:
         return
@@ -14,8 +15,9 @@ def minute_of_business(date_time, store):
         drink_choice = store.pick_drink(hour)
 
         # determine prices and total cost of transaction for customer
-        food_price = store.food_menu.loc[store.food_menu['food_item'] == food_choice, "price"]
-        drink_price = store.drink_menu.loc[store.drink_menu['drink_item'] == drink_choice, "price"]
+        food_price = int(store.food_menu.loc[store.food_menu['food_item'] == food_choice, "price"])
+        drink_price = int(store.drink_menu.loc[store.drink_menu['drink_item'] == drink_choice, "price"])
+
         tip = customer.determine_tip()
         total_cost = food_price + drink_price + tip
 
@@ -23,14 +25,15 @@ def minute_of_business(date_time, store):
         customer.update_budget(total_cost)
 
         # format store ledger entry
-        transaction = [date_time, customer.customer_id, food_choice, drink_choice, total_cost, tip]
+        transaction = [date_time.strftime(format='%d/%m/%Y, %H:%M:%S'), customer.customer_id, food_choice, drink_choice,
+                       total_cost, tip]
 
         # add transaction to store ledger
         store.add_to_ledger(transaction)
 
         # if customer's updated budget is insufficient, then remove from store ledger
         # don't have to worry about customer type due to size of budget for one time customers
-        store.check_returning_viability(customer.customer_id)
+        store.check_returning_viability(customer)
 
 
 def day_of_business(date, store):
@@ -41,3 +44,9 @@ def day_of_business(date, store):
 
 def get_hour(time):
     return int(time[0:2])
+
+
+def grab_customer(id, customer_list):
+    for i in customer_list:
+        if i.customer_id == id:
+            return i

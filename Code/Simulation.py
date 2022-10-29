@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import numpy as np
 import os
-from Classes.Customer import Customer, HipsterCustomer, ReturningCustomer
+from Classes.Customer import HipsterCustomer, ReturningCustomer
 from Classes.Store import Store
 
 # Setting up database of times with menu probabilities

@@ -31,7 +31,7 @@ class Store(object):
     # most expensive drink item AND the most expensive food item on the menu in one transaction
     # if not, this customer is removed from the viable returning customer list
     def check_returning_viability(self, returning_customer):
-        if returning_customer.budget() < self.food_menu["price"].max() + self.drink_menu["price"].max():
+        if returning_customer.budget < self.food_menu["price"].max() + self.drink_menu["price"].max():
             self.remove_returning_customer(returning_customer.customer_id)
         else:
             return
@@ -70,18 +70,18 @@ class Store(object):
     # picks a food item based on the hour of day, according to probabilities in food_menu
     def pick_food(self, hour):
         if hour < 11:
-            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["breakfast_prob"])
+            return np.random.choice(list(self.food_menu["food_item"]), 1, list(self.food_menu["breakfast_prob"]))[0]
         elif (hour >= 11) & (hour < 13):
-            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["lunch_prob"])
+            return np.random.choice(list(self.food_menu["food_item"]), 1, list(self.food_menu["lunch_prob"]))[0]
         else:
-            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["dinner_prob"])
+            return np.random.choice(list(self.food_menu["food_item"]), 1, list(self.food_menu["dinner_prob"]))[0]
 
     def pick_drink(self, hour):
         if hour < 11:
-            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["breakfast_prob"])
+            return np.random.choice(list(self.drink_menu["drink_item"]), 1, list(self.drink_menu["breakfast_prob"]))[0]
         elif (hour >= 11) & (hour < 13):
-            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["lunch_prob"])
+            return np.random.choice(list(self.drink_menu["drink_item"]), 1, list(self.drink_menu["lunch_prob"]))[0]
         else:
-            np.random.choice(self.food_menu["food_item"], 1, self.food_menu["dinner_prob"])
+            return np.random.choice(list(self.drink_menu["drink_item"]), 1, list(self.drink_menu["dinner_prob"]))[0]
 
 
