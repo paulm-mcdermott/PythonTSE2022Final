@@ -1,9 +1,10 @@
 from Classes.Store import Store
 from Classes.Customer import Customer
+import pandas
 
 
-def minute_of_business(time, store):
-    hour = get_hour(time)
+def minute_of_business(date_time, store):
+    hour = get_hour(date_time)
     customer = store.customer_entry()
     if customer is None:
         return
@@ -22,7 +23,7 @@ def minute_of_business(time, store):
         customer.update_budget(total_cost)
 
         # format store ledger entry
-        transaction = [customer.customer_id, food_choice, drink_choice, tip, total_cost]
+        transaction = [date_time, customer.customer_id, food_choice, drink_choice, total_cost, tip]
 
         # add transaction to store ledger
         store.add_to_ledger(transaction)
@@ -30,6 +31,12 @@ def minute_of_business(time, store):
         # if customer's updated budget is insufficient, then remove from store ledger
         # don't have to worry about customer type due to size of budget for one time customers
         store.check_returning_viability(customer.customer_id)
+
+
+def day_of_business(date, store):
+    times_idx = pd.period_range(date + " 8:00", freq="T", periods=600)
+    for i in times_idx:
+        minute_of_business(i, store)
 
 
 def get_hour(time):
