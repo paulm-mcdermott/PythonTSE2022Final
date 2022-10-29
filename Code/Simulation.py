@@ -1,3 +1,5 @@
+from typing import List
+
 import pandas as pd
 import datetime as dt
 import matplotlib.pyplot as plt
@@ -32,7 +34,7 @@ print(drinks_menu)
 # create hipster and returning customers
 hipster_list = [HipsterCustomer("H" + str(i)) for i in range(1, 334)]
 returning_list = [ReturningCustomer("R" + str(i)) for i in range(334, 1001)]
-all_returning_list = hipster_list + returning_list
+all_returning_list = returning_list + hipster_list
 
 print(random.choice(all_returning_list))
 print(all_returning_list)
