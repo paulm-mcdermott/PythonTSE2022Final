@@ -35,6 +35,7 @@ for i in hipster_list:
     hipster_id_list.append(i.customer_id)
 print(hipster_id_list)
 
+
 returning_id_list = []
 for i in returning_list:
     returning_id_list.append(i.customer_id)
