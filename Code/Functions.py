@@ -43,10 +43,6 @@ def day_of_business(date, store):
         minute_of_business(i, store)
 
 
-def get_hour(time):
-    return int(time[0:2])
-
-
 def grab_customer(id, customer_list):
     for i in customer_list:
         if i.customer_id == id:
