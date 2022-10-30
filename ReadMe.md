@@ -10,28 +10,38 @@ An in-depth paragraph about your project and overview of use.
 This project is the key deliverable for a master's level introduction to programming in Python at the Toulouse School of Economics. Our work herein uses a vast array of skills picked up during the short course. These include working with pandas, class structures, project management and general data analysis. 
 
 This project is divided into four parts. They are summarised below.
+
 1. Exploring existing data. We explore the provided coffeebar data and answer several questions as requested. The key information here is to determine what food and drinks the store sells and the relative popularity of these items amongst customers. Our results show clear time patterns in purchases, with patterns being homogenous within 3 distinct time periods: a morning slot from 8-11am, a lunch time slot from 11-1pm and an afternoon slot from 1-6pm. We can take the probabilities of buying each item within these slots and use these in our subsequent simulations.
-2. Setting up a class structure. We have four types of customers that may enter the store. Returning customers have two types: regulars and hipsters, who differ in their initial budgets. Then, walk-ins are split into normal walk-ins and trip advisor tourists, the latter of which may leave a tip after their purchase. In this stage of the project, we set up these classes as well as
+
+2. Setting up a class structure. We have four types of customers that may enter the store. Returning customers have two types: regulars and hipsters, who differ in their initial budgets. Then, walk-ins are split into normal walk-ins and trip advisor tourists, the latter of which may leave a tip after their purchase. 
+In this stage of the project, we set up these classes as well as a store class, although we will only use one store. This allows us to build most of the functionality into the classes and keep information stored within objects.
+For instance, we build several methods into the store class which determine whether customers enter in a given minute and then determines what type of customer. To support this, initialising a store requires a food and drink 'menu' which contains prices as well as the probabilities at different times, determined in Part 1.
+
+3. With this structure, we now run simulations by using our minute_of_business function which simulates a possible transaction in a given minute. If a transaction occurs, this outputs the details of it and stores these in the store and the relevant customer. 
+We can then analyse this information after simulating 5 years of activity with this minute-level function as the base. 
+
+4. We explore some extension questions
 
 ## Getting Started
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* This project was set up using Pycharm CE, with a Conda interpreter. We used M1 MacBooks. 
 
-### Installing
-
-* How/where to download your program
-* Any modifications needed to be made to files/folders
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
+* The code should be straightforward to run. Here is an explainer for the files.
+
+1. Exploratory. This covers Part 1 in its entirety.
+
+2. Classes folder, this contains the set up for the Customer and Store Classes. This is Part 2 in its entirety. 
+
+3. Functions, this sets up the functions for our simulations. This is part of Part 3.
+
+4. Simulations. This runs the simulations and analyses the results. This completes Part 4.
+
+5. Old Code. This contains some code we didn't end up using but wanted to have for a reference. 
 
 ## Help
 
@@ -42,7 +52,10 @@ command to run if program contains helper info
 
 ## Authors
 
-Contributors names and contact info
+Contributors names and contact info.
+
+ex. Paul McDermott
+ex. Justin Standish-White
 
 ex. Dominique Pizzie  
 ex. [@DomPizzie](https://twitter.com/dompizzie)
