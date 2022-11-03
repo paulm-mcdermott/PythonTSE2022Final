@@ -58,7 +58,7 @@ coffeebar_df['FOOD'] = coffeebar_df['FOOD'].fillna("none")
 
 ct_time_food = pd.crosstab(coffeebar_df['TIME'], coffeebar_df['FOOD'], normalize = 'index')*100
 print(ct_time_food)
-ct_time_food.to_csv(driectory + '/Results/FoodDist.csv')
+ct_time_food.to_csv(directory + '/Results/FoodDist.csv')
 # Observed probabilities:
 # 8-11: 100% none
 # 11-13: 12.5% cookie muffin pie, 62.5% sandwich
@@ -109,3 +109,5 @@ plt.savefig(directory + '/Results/DrinksDist.png', dpi=300)
 # 8-11: coffee 1/3, everything else 2/15
 # 11-13: soda = 7/12, everything else 1/12
 # 13-18: all drinks 16.66% (1/6)
+
+print("file ran")
