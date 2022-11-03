@@ -51,12 +51,21 @@ plt.savefig(directory + '/Results/DrinksFreq.png', dpi=300)
 
 # Probabilities of different purchases
 
+# convert time to date time for easier extraction of timestamp
+coffeebar_df['DATETIME'] = pd.to_datetime(coffeebar_df['TIME'])
+print(coffeebar_df['DATETIME'])
+
+# add column that is just the time stamp
+coffeebar_df['TIMESTAMP'] = coffeebar_df['DATETIME'].dt.time
+print(coffeebar_df['TIMESTAMP'])
+
+
 # Food
 # Change Nan's to 'None' so they show up in the crosstab
 
 coffeebar_df['FOOD'] = coffeebar_df['FOOD'].fillna("none")
 
-ct_time_food = pd.crosstab(coffeebar_df['TIME'], coffeebar_df['FOOD'], normalize = 'index')*100
+ct_time_food = pd.crosstab(coffeebar_df['TIMESTAMP'], coffeebar_df['FOOD'], normalize = 'index')*100
 print(ct_time_food)
 ct_time_food.to_csv(directory + '/Results/FoodDist.csv')
 # Observed probabilities:
@@ -86,7 +95,7 @@ plt.savefig(directory + '/Results/FoodDist.png', dpi=300)
 
 # Drinks
 
-ct_time_drinks = pd.crosstab(coffeebar_df['TIME'], coffeebar_df['DRINKS'], normalize='index') * 100
+ct_time_drinks = pd.crosstab(coffeebar_df['TIMESTAMP'], coffeebar_df['DRINKS'], normalize='index') * 100
 print(ct_time_drinks)
 ct_time_drinks.to_csv(directory + '/Results/DrinksDist.csv')
 
