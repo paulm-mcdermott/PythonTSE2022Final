@@ -38,9 +38,13 @@ def minute_of_business(date_time, store):
 
 
 def day_of_business(date, store):
-    times_idx = pd.period_range(date + " 8:00", freq="T", periods=600)
+    times_idx = pd.period_range(pd.Timestamp.combine(date=date, time=dt.time(hour=8)), freq="T", periods=600)
     for i in times_idx:
         minute_of_business(i, store)
+
+
+def datetime_to_date(i):
+    return i.date()
 
 
 def grab_customer(id, customer_list):

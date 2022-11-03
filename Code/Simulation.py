@@ -7,6 +7,9 @@ import matplotlib.dates as mdates
 import numpy as np
 import os
 import random
+import time
+
+import Functions
 from Classes.Customer import HipsterCustomer, ReturningCustomer
 from Classes.Store import Store
 from Functions import *
@@ -30,17 +33,19 @@ drinks_menu = pd.DataFrame([['Coffee', 3, 1 / 3, 1 / 12, 1 / 6],
                            columns=['drink_item', 'price', 'breakfast_prob', 'lunch_prob', 'dinner_prob'],
                            )
 
-print(drinks_menu)
+
 # create hipster and returning customers
 hipster_list = [HipsterCustomer("H" + str(i)) for i in range(1, 334)]
 returning_list = [ReturningCustomer("R" + str(i)) for i in range(334, 1001)]
 all_returning_list = returning_list + hipster_list
 
-print(random.choice(all_returning_list))
-print(all_returning_list)
 # instantiate store
 coffee_shop = Store(food_menu, drinks_menu, all_returning_list)
-times_idx = pd.period_range("2000-01-01 8:00", freq="T", periods=600)
-for i in times_idx[:9]:
-    minute_of_business(i, coffee_shop)
-print(coffee_shop.retrieve_ledger().loc[:, 'customer_id':'tip'])
+date_list = pd.date_range(start="2016-01-01",end="2020-12-31")
+date_list_2 = list(map(datetime_to_date, date_list))
+
+for i in date_list_2:
+    day_of_business(i, coffee_shop)
+df_ledger = coffee_shop.retrieve_ledger()
+df_ledger.to_csv('./Results/SampleLedger.csv')
+
