@@ -14,6 +14,12 @@ from Classes.Customer import HipsterCustomer, ReturningCustomer
 from Classes.Store import Store
 from Functions import *
 
+# filepath
+os.path.abspath('.')
+
+# directory = '/Users/justinstandish-white/PycharmProjects/exam-mcdermott-standish-white'
+directory = '/Users/paulmcdermott/PycharmProjects/exam-mcdermott-standish-white'
+
 # Setting up database of times with menu probabilities
 
 food_menu = pd.DataFrame([['Cookie', 2, 0, 1 / 8, 4 / 30],
@@ -41,11 +47,46 @@ all_returning_list = returning_list + hipster_list
 
 # instantiate store
 coffee_shop = Store(food_menu, drinks_menu, all_returning_list)
+
+# set seed
+random.seed(7)
+
+# make a list of 5-years worth of days
 date_list = pd.date_range(start="2016-01-01",end="2020-12-31")
 date_list_2 = list(map(datetime_to_date, date_list))
 
+# for each day, run day of business function
 for i in date_list_2:
     day_of_business(i, coffee_shop)
+
+# retrieve full 5-year ledger
 df_ledger = coffee_shop.retrieve_ledger()
-df_ledger.to_csv('./Results/SampleLedger.csv')
+df_ledger.to_csv(directory + '/Results/SimulationLedger.csv',sep = ",", index=False)
+df_ledger = pd.read_csv(directory + '/Results/SimulationLedger.csv', sep=',')
+print(df_ledger)
+
+####################
+# Part 4:          #
+####################
+
+# show some histories of returning customers
+# pick three random returning customers
+sample_returning = random.choices(coffee_shop.viable_ret_cust, k=3)
+
+# print out the histories of the random returning customers
+for i in sample_returning:
+    print(i.retrieve_purchase_history())
+
+# Lower returning to 50 customers, then run same simulation
+hipster_list_p4 = [HipsterCustomer("H" + str(i)) for i in range(1, 20)]
+returning_list_p4 = [ReturningCustomer("R" + str(i)) for i in range(20, 51)]
+all_returning_list_p4 = returning_list_p4 + hipster_list_p4
+coffee_shop_p4 = Store(food_menu, drinks_menu, all_returning_list_p4)
+
+# for each day, run day of business function
+for i in date_list_2:
+    day_of_business(i, coffee_shop_p4)
+df_ledger_p4 = coffee_shop_p4.retrieve_ledger()
+print(df_ledger_p4)
+
 

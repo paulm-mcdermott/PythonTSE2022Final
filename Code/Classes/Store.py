@@ -53,7 +53,10 @@ class Store(object):
     # if customer_entry determines that a customer will indeed enter, picks which type
     # and returns that corresponding customer object
     def pick_customer_type(self):
-        type_cust = random.uniform(0, 1)
+        if len(self.viable_ret_cust) == 0:
+            type_cust = 1
+        else:
+            type_cust = random.uniform(0, 1)
         if type_cust < self.prob_returning:
             return self.pick_returning_customer()
         else:

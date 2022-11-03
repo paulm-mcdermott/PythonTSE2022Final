@@ -1,5 +1,7 @@
 import random
 
+import pandas as pd
+
 
 class Customer(object):
     def __init__(self, customer_id, budget):
@@ -20,6 +22,11 @@ class Customer(object):
 
     def add_to_history(self, transaction):
         self.purchase_history.append(transaction)
+
+    def retrieve_purchase_history(self):
+        return pd.DataFrame.from_records(self.purchase_history,
+                                         columns=['date_time', 'customer_id', 'food_choice', 'drink_choice',
+                                                  'transaction_value', 'tip'])
 
 
 class OneTimeCustomer(Customer):
