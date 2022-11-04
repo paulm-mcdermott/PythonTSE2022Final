@@ -14,16 +14,18 @@ from Classes.Customer import HipsterCustomer, ReturningCustomer
 from Classes.Store import Store
 from Functions import *
 
-
+# Load your own directory to prevent issues
 os.path.abspath('.')
 directory = '/Users/justinstandish-white/PycharmProjects/exam-mcdermott-standish-white'
 # directory = '/Users/paulmcdermott/PycharmProjects/exam-mcdermott-standish-white'
 
 df_ledger = pd.read_csv(directory + '/Results/Part 3/SimulationLedger.csv', sep=',')
 
+# TODO note the number of returning customers at the end of the simulation
 
-
-####### Data ANALYSIS
+######################################
+# Analysing Simulation Data          #
+######################################
 
 print(df_ledger.head(7))
 
@@ -50,7 +52,12 @@ plt.title('Total Monthly Income, 2016-2020')
 plt.gcf().set_size_inches(9, 6)
 plt.savefig(directory + '/Results/Part 3/MonthlyIncome.png', dpi=300)
 
-# No clear trends, makes sense given the model
+# We see a constant trend over time here which makes sense in our model, as the probabilities of different spending
+# behaviour does not change over time. All parameters are constant and all types of customers have the same spending
+# behaviour aside from tips. As we have a large body of returning customers (1000), we don't 'run out' of such customers
+# and thereby, the probability of a TripAdvisor customer coming doesn't change. Hence, the average tip amount will be
+# constant in it's expected value.
+# over the period, we note that the average monthly income is just over €20 000.
 
 # tips over time
 
@@ -68,7 +75,9 @@ plt.title('Total Monthly Tips, 2016-2020')
 plt.gcf().set_size_inches(9, 6)
 plt.savefig(directory + '/Results/Part 3/MonthlyTips.png', dpi=300)
 
-# No trends either, trip advisor customers remain equally likely over time
+# As discussed above, the probability of trip advisor customers doesn't change over time. Hence, we see a constant
+# trend in tip levels. Total amount of tips comes to around €2 000 per month on average, therefore making up around
+# 10% of total income for the store.
 
 # tips and income
 
@@ -88,7 +97,7 @@ plt.legend(title='Category', loc='right',labels =['Total Income', 'Total Tips'])
 plt.gcf().set_size_inches(9, 6)
 plt.savefig(directory + '/Results/Part 3/MonthlyIncTips.png', dpi=300)
 
-# combined plot
+# This simply combines the two previous plots.
 
 
 # Income by times
@@ -109,12 +118,14 @@ plt.legend(title='Category', loc='upper right',labels =['Transactions', 'Tips'])
 plt.gcf().set_size_inches(9, 6)
 plt.savefig(directory + '/Results/Part 3/IncomeByTimes.png', dpi=300)
 
-# time segments are clear, more expensive combinations are most likely at midday. Morning session has the
-# lowest average transaction as people don't buy food
-# tips are constant, tripadvisor prob. is constant over time and so is EV of tip generator
+# The three time segments are made clear in this plot.
+# The morning slot has the lowest average value (just under €4) due to no one buying food at this time.
+# The lunch slot has the highest average (just under 6) due to everyone buying a food then.
+# The afternoon slot is in the middle with an average of just under €5, as the prob. of buying a food item is 40%.
+# There is a constant trend for tips, as tip amounts are independent of time of day.
 
 
-# food dist in simulation
+# Food Distribution in Simulation
 
 df_ledger['food_choice'] = df_ledger['food_choice'].replace('None',np.nan)
 
@@ -130,5 +141,10 @@ plt.gcf().set_size_inches(9,7)
 plt.savefig(directory + '/Results/Part 3/FoodFreqSim.png', dpi=300)
 # plt.show()
 
-# some variation but ratios are there.
+# This is a replication of a similar plot in the given coffee_bar data. We see similar trends in that consumption across
+# years is roughly equal and sandwiches are clearly more popular. However, in the previous case, sandwiches were
+# twice as popular whilst here it is more 1.3x. This is because we have a constant probability of customers entering the
+# store in a given minute, across the day. The given data had variations with the most customer density being in the
+# lunch slot, when sandwiches are most popular. This is a simplification in our model and we see the results here.
+
 

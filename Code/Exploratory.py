@@ -118,5 +118,3 @@ plt.savefig(directory + '/Results/Part 1/DrinksDist.png', dpi=300)
 # 8-11: coffee 1/3, everything else 2/15
 # 11-13: soda = 7/12, everything else 1/12
 # 13-18: all drinks 16.66% (1/6)
-
-print("file ran")
