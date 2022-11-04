@@ -61,8 +61,8 @@ for i in date_list_2:
 
 # retrieve full 5-year ledger
 df_ledger = coffee_shop.retrieve_ledger()
-df_ledger.to_csv(directory + '/Results/SimulationLedger.csv',sep = ",", index=False)
-df_ledger = pd.read_csv(directory + '/Results/SimulationLedger.csv', sep=',')
+df_ledger.to_csv(directory + '/Results/Part 3/SimulationLedger.csv',sep = ",", index=False)
+df_ledger = pd.read_csv(directory + '/Results/Part 3/SimulationLedger.csv', sep=',')
 print(df_ledger)
 
 ####################

@@ -16,10 +16,10 @@ from Functions import *
 
 
 os.path.abspath('.')
-# directory = '/Users/justinstandish-white/PycharmProjects/exam-mcdermott-standish-white'
-directory = '/Users/paulmcdermott/PycharmProjects/exam-mcdermott-standish-white'
+directory = '/Users/justinstandish-white/PycharmProjects/exam-mcdermott-standish-white'
+# directory = '/Users/paulmcdermott/PycharmProjects/exam-mcdermott-standish-white'
 
-df_ledger = pd.read_csv(directory + '/Results/SimulationLedger.csv', sep=',')
+df_ledger = pd.read_csv(directory + '/Results/Part 3/SimulationLedger.csv', sep=',')
 
 
 
@@ -48,7 +48,7 @@ plt.xlabel('Month')
 plt.title('Total Monthly Income, 2016-2020')
 
 plt.gcf().set_size_inches(9, 6)
-plt.savefig(directory + '/Results/MonthlyIncome.png', dpi=300)
+plt.savefig(directory + '/Results/Part 3/MonthlyIncome.png', dpi=300)
 
 # No clear trends, makes sense given the model
 
@@ -56,7 +56,7 @@ plt.savefig(directory + '/Results/MonthlyIncome.png', dpi=300)
 
 monthly_agg_tip = df_ledger.groupby(by='YrMonth')[['tip']].agg('sum')
 
-monthly_agg_tip.plot(kind="bar", rot=0, legend = None)
+monthly_agg_tip.plot(kind="bar", rot=0, legend=None)
 
 x_ticks = [0, 6, 12, 18, 24, 30, 36, 42, 48, 54]
 x_labels = ['Jan-\'16', 'Jul-\'16', 'Jan-\'17', 'Jul-\'17', 'Jan-\'18', 'Jul-\'18', 'Jan-\'19', 'Jul-\'19', 'Jan-\'20', 'Jul-\'20']
@@ -66,13 +66,14 @@ plt.xlabel('Month')
 plt.title('Total Monthly Tips, 2016-2020')
 
 plt.gcf().set_size_inches(9, 6)
-plt.savefig(directory + '/Results/MonthlyTips.png', dpi=300)
+plt.savefig(directory + '/Results/Part 3/MonthlyTips.png', dpi=300)
 
 # No trends either, trip advisor customers remain equally likely over time
 
 # tips and income
 
 monthly_agg = df_ledger.groupby(by='YrMonth').agg('sum')
+monthly_agg.pop('YEAR')
 
 monthly_agg.plot(kind="bar",  rot=0)
 
@@ -85,7 +86,7 @@ plt.title('Total Monthly Income Including Tips, 2016-2020')
 plt.legend(title='Category', loc='right',labels =['Total Income', 'Total Tips'])
 
 plt.gcf().set_size_inches(9, 6)
-plt.savefig(directory + '/Results/MonthlyIncTips.png', dpi=300)
+plt.savefig(directory + '/Results/Part 3/MonthlyIncTips.png', dpi=300)
 
 # combined plot
 
@@ -106,7 +107,7 @@ plt.title('Average Transaction and Tip by Time of Day, 2016-2020')
 plt.legend(title='Category', loc='upper right',labels =['Transactions', 'Tips'])
 
 plt.gcf().set_size_inches(9, 6)
-plt.savefig(directory + '/Results/IncomeByTimes.png', dpi=300)
+plt.savefig(directory + '/Results/Part 3/IncomeByTimes.png', dpi=300)
 
 # time segments are clear, more expensive combinations are most likely at midday. Morning session has the
 # lowest average transaction as people don't buy food
@@ -126,7 +127,7 @@ plt.title('Quantity of Food Sold, 2016-2020')
 plt.legend(title = 'Year', loc='upper left')
 
 plt.gcf().set_size_inches(9,7)
-plt.savefig(directory + '/Results/FoodFreqSim.png', dpi=300)
+plt.savefig(directory + '/Results/Part 3/FoodFreqSim.png', dpi=300)
 # plt.show()
 
 # some variation but ratios are there.
