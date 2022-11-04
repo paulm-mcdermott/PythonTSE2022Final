@@ -16,7 +16,8 @@ from Functions import *
 
 
 os.path.abspath('.')
-directory = '/Users/justinstandish-white/PycharmProjects/exam-mcdermott-standish-white'
+# directory = '/Users/justinstandish-white/PycharmProjects/exam-mcdermott-standish-white'
+directory = '/Users/paulmcdermott/PycharmProjects/exam-mcdermott-standish-white'
 
 df_ledger = pd.read_csv(directory + '/Results/SimulationLedger.csv', sep=',')
 
@@ -80,7 +81,7 @@ x_labels = ['Jan-\'16', 'Jul-\'16', 'Jan-\'17', 'Jul-\'17', 'Jan-\'18', 'Jul-\'1
 plt.xticks(ticks=x_ticks, labels=x_labels)
 plt.ylabel('Monthly Tip Total')
 plt.xlabel('Month')
-plt.title('Total Monthly Tips, 2016-2020')
+plt.title('Total Monthly Income Including Tips, 2016-2020')
 plt.legend(title='Category', loc='right',labels =['Total Income', 'Total Tips'])
 
 plt.gcf().set_size_inches(9, 6)
