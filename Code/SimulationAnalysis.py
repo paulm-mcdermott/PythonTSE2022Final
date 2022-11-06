@@ -10,7 +10,7 @@ from Functions import *
 # #################################
 
 # Here, we analyse the simulation dataset as requested.
-# First, note that the number of returning customers left is 672 (this was calculated in Simulation.py.
+# First, note that the number of returning customers left is 672 (this was calculated in Simulation.py).
 # To analyse the data, we produce 5 graphs (one is a combination of two others). Each is discussed underneath
 # relevant code below.
 
@@ -136,7 +136,7 @@ plt.xlabel('Food')
 plt.title('Quantity of Food Sold, 2016-2020')
 plt.legend(title='Year', loc='upper left')
 
-plt.gcf().set_size_inches(9,7)
+plt.gcf().set_size_inches(9, 7)
 plt.savefig(directory + '/Results/Part 3/FoodFreqSim.png', dpi=300)
 # plt.show()
 
