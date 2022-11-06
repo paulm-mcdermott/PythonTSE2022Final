@@ -3,6 +3,18 @@ import numpy as np
 import pandas as pd
 from Classes.Customer import OneTimeCustomer, TripAdvisorCustomer
 
+# #################################
+# NOTES
+# #################################
+
+# This files introduces the store class that we create to make our simulation more efficient.
+# Stores are initialised with the relevant menus, customer list and customer probabilities
+# We set the probability of a customer entering the store in a given minute as 0.25
+# this is based on the coffeebar data which had 171 customers over 600 minutes per day, so we round off to 0.25
+#
+# Most of the functionality is built into this store class. Including the system to pick type of customer,
+# drink choices, budget checking and the maintaining of a ledger of transactions
+
 
 class Store(object):
 

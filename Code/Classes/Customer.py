@@ -2,6 +2,11 @@ import random
 
 import pandas as pd
 
+# #################################
+# NOTES
+# #################################
+
+# This files introduces the classes for the different types of customers.
 
 class Customer(object):
     def __init__(self, customer_id, budget):

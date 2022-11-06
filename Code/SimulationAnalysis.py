@@ -1,34 +1,33 @@
-from typing import List
 
-import pandas as pd
-import datetime as dt
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
 import numpy as np
 import os
-import random
-import time
-
-import Functions
-from Classes.Customer import HipsterCustomer, ReturningCustomer
-from Classes.Store import Store
 from Functions import *
 
-# Load your own directory to prevent issues
+
+# #################################
+# NOTES
+# #################################
+
+# Here, we analyse the simulation dataset as requested.
+# First, note that the number of returning customers left is 672 (this was calculated in Simulation.py.
+# To analyse the data, we produce 5 graphs (one is a combination of two others). Each is discussed underneath
+# relevant code below.
+
+
+# Please run the below line and amend as necessary to set the directory for your computer
 os.path.abspath('.')
 directory = '/Users/justinstandish-white/PycharmProjects/exam-mcdermott-standish-white'
 # directory = '/Users/paulmcdermott/PycharmProjects/exam-mcdermott-standish-white'
 
 df_ledger = pd.read_csv(directory + '/Results/Part 3/SimulationLedger.csv', sep=',')
 
-# TODO note the number of returning customers at the end of the simulation
 
 ######################################
 # Analysing Simulation Data          #
 ######################################
 
 print(df_ledger.head(7))
-
 
 df_ledger['DATETIME'] = pd.to_datetime(df_ledger['date_time'])
 
@@ -40,7 +39,7 @@ df_ledger['YEAR'] = df_ledger['DATETIME'].dt.year
 
 monthly_agg_tv = df_ledger.groupby(by='YrMonth')[['transaction_value']].agg('sum')
 
-monthly_agg_tv.plot(kind="bar",  rot=0, legend = None)
+monthly_agg_tv.plot(kind="bar",  rot=0, legend=None)
 
 x_ticks = [0, 6, 12, 18, 24, 30, 36, 42, 48, 54]
 x_labels = ['Jan-\'16', 'Jul-\'16', 'Jan-\'17', 'Jul-\'17', 'Jan-\'18', 'Jul-\'18', 'Jan-\'19', 'Jul-\'19', 'Jan-\'20', 'Jul-\'20']
@@ -92,7 +91,7 @@ plt.xticks(ticks=x_ticks, labels=x_labels)
 plt.ylabel('Monthly Tip Total')
 plt.xlabel('Month')
 plt.title('Total Monthly Income Including Tips, 2016-2020')
-plt.legend(title='Category', loc='right',labels =['Total Income', 'Total Tips'])
+plt.legend(title='Category', loc='right', labels=['Total Income', 'Total Tips'])
 
 plt.gcf().set_size_inches(9, 6)
 plt.savefig(directory + '/Results/Part 3/MonthlyIncTips.png', dpi=300)
@@ -113,7 +112,7 @@ plt.xticks(ticks=x_ticks, labels=x_labels)
 plt.ylabel('Average Value')
 plt.xlabel('Time')
 plt.title('Average Transaction and Tip by Time of Day, 2016-2020')
-plt.legend(title='Category', loc='upper right',labels =['Transactions', 'Tips'])
+plt.legend(title='Category', loc='upper right', labels=['Transactions', 'Tips'])
 
 plt.gcf().set_size_inches(9, 6)
 plt.savefig(directory + '/Results/Part 3/IncomeByTimes.png', dpi=300)
@@ -127,7 +126,7 @@ plt.savefig(directory + '/Results/Part 3/IncomeByTimes.png', dpi=300)
 
 # Food Distribution in Simulation
 
-df_ledger['food_choice'] = df_ledger['food_choice'].replace('None',np.nan)
+df_ledger['food_choice'] = df_ledger['food_choice'].replace('None', np.nan)
 
 ct_food = pd.crosstab(df_ledger['food_choice'], df_ledger['YEAR'])
 
@@ -135,7 +134,7 @@ ct_food.plot(kind="bar", stacked=True, rot=0)
 plt.ylabel('Quantity Sold')
 plt.xlabel('Food')
 plt.title('Quantity of Food Sold, 2016-2020')
-plt.legend(title = 'Year', loc='upper left')
+plt.legend(title='Year', loc='upper left')
 
 plt.gcf().set_size_inches(9,7)
 plt.savefig(directory + '/Results/Part 3/FoodFreqSim.png', dpi=300)
@@ -145,6 +144,4 @@ plt.savefig(directory + '/Results/Part 3/FoodFreqSim.png', dpi=300)
 # years is roughly equal and sandwiches are clearly more popular. However, in the previous case, sandwiches were
 # twice as popular whilst here it is more 1.3x. This is because we have a constant probability of customers entering the
 # store in a given minute, across the day. The given data had variations with the most customer density being in the
-# lunch slot, when sandwiches are most popular. This is a simplification in our model and we see the results here.
-
-
+# lunch slot, when sandwiches are most popular. This is a simplification in our model, and we see the results here.

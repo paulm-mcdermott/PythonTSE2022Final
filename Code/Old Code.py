@@ -1,3 +1,13 @@
+
+# #################################
+# NOTES
+# #################################
+
+# This file can be ignored. We wrote some code that we ended up not using, but wished to have on hand in case.
+# One example was a table of individual minutes with the probabilities of different food and drinks. This would have
+# made our model more flexible (i.e. not relying on 3 distinct time windows).
+# However, it was an unnecessary complication.
+
 # drinks_prob.index = times_idx
 #
 # food_prob = pd.DataFrame(columns = ['Cookie', 'Muffin', 'Pie', 'Sandwich', 'None'])
@@ -42,7 +52,7 @@
 #     print(timedelta)
 #     timedelta = timedelta + incr
 #
-# # CSV's to check
+# # CSVs to check
 # food_prob.to_csv('Results/Food_Prob.csv')
 # drinks_prob.to_csv('Results/Drinks_Prob.csv')
 #
@@ -70,7 +80,8 @@
 # # Prices menus
 #
 # food_menu = pd.DataFrame( [2, 3, 3, 2, 0], columns = ['Price'], index=['Cookie', 'Muffin', 'Pie', 'Sandwich', 'None'])
-# drinks_menu = pd.DataFrame( [3, 4, 5, 3, 3, 2], columns = ['Price'], index=['Coffee', 'Frappucino', 'Milkshake', 'Soda', 'Tea', 'Water'])
+# drinks_menu = pd.DataFrame( [3, 4, 5, 3, 3, 2],
+# columns = ['Price'], index=['Coffee', 'Frappucino', 'Milkshake', 'Soda', 'Tea', 'Water'])
 #
 #
 #

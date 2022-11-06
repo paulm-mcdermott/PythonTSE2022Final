@@ -3,6 +3,18 @@ from Classes.Customer import Customer
 import pandas as pd
 import datetime as dt
 
+# #################################
+# NOTES
+# #################################
+
+# Using the established class structure, this file defines the workhorse functions for our simulation.
+# The premise of this is minute of business which takes in a time and a store object, and then simulates
+# what occurs in that minute. So, the type of customer, what is ordered and if there is a tip. It then adds
+# to a customer and store ledger and checks the budget of returning customers so that, if necessary, those
+# with insufficient funds are removed from the client list
+#
+# Additionally, we have a day of business function (using the minute base) and two other functions used elsewhere
+
 
 def minute_of_business(date_time, store):
     hour = date_time.hour
@@ -37,16 +49,20 @@ def minute_of_business(date_time, store):
         store.check_returning_viability(customer)
 
 
+# Use minute of business to simulate a day of business. We input a single date and then minutes from 8h00 to 18h00 are
+# run through the simulation
 def day_of_business(date, store):
     times_idx = pd.period_range(pd.Timestamp.combine(date=date, time=dt.time(hour=8)), freq="T", periods=600)
     for i in times_idx:
         minute_of_business(i, store)
 
 
+# Function to convert datetime objects to just the date, used for data analysis and the simulation
 def datetime_to_date(i):
     return i.date()
 
 
+# Function to grab a specific customer from a list
 def grab_customer(id, customer_list):
     for i in customer_list:
         if i.customer_id == id:

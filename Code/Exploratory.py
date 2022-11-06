@@ -1,12 +1,24 @@
 import pandas as pd
-import datetime as dt
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-import numpy as np
 import os
 
-# load csv into dataframe
+# #################################
+# NOTES
+# #################################
+
+# This is the file that explores the given coffee bar dataset.
+# At first, we get the basic information requested such as what the bar serves
+# Then, we present several graphs. These will automatically save to the relevant directory
+# USER NOTE: Please add your relevant directory and comment out the other directory options below.
+
+# #################################
+# #################################
+# #################################
+
+
+# load csv into dataframe - Please run the below line and amend as necessary to set the directory for your computer
 os.path.abspath('.')
+# directory = '/Users/paulmcdermott/PycharmProjects/exam-mcdermott-standish-white'
 directory = '/Users/justinstandish-white/PycharmProjects/exam-mcdermott-standish-white'
 coffeebar_df = pd.read_csv(directory + '/Data/Coffeebar_2016-2020.csv', sep=';')
 
@@ -24,6 +36,7 @@ print(len(coffeebar_df["CUSTOMER"].unique()))
 # create year variable for plots
 coffeebar_df['YEAR'] = pd.DatetimeIndex(coffeebar_df['TIME']).year
 
+# #################################
 # bar chart for food order frequency
 
 ct_food = pd.crosstab(coffeebar_df['FOOD'], coffeebar_df['YEAR'])
@@ -32,10 +45,11 @@ ct_food.plot(kind="bar", stacked=True, rot=0)
 plt.ylabel('Quantity Sold')
 plt.xlabel('Food')
 plt.title('Quantity of Food Sold, 2016-2020')
-plt.gcf().set_size_inches(9,6)
+plt.gcf().set_size_inches(9, 6)
 plt.savefig(directory + '/Results/Part 1/FoodFreq.png', dpi=300)
 # plt.show()
 
+# ###################################
 # bar chart for drink order frequency
 
 ct_drinks = pd.crosstab(coffeebar_df['DRINKS'], coffeebar_df['YEAR'])
@@ -44,11 +58,11 @@ ct_drinks.plot(kind="bar", stacked=True, rot=0)
 plt.ylabel('Quantity Sold')
 plt.xlabel('Drinks')
 plt.title('Quantity of Drinks Sold, 2016-2020')
-plt.gcf().set_size_inches(9,6)
+plt.gcf().set_size_inches(9, 6)
 plt.savefig(directory + '/Results/Part 1/DrinksFreq.png', dpi=300)
 # plt.show()
 
-
+# ####################################
 # Probabilities of different purchases
 
 # convert time to date time for easier extraction of timestamp
@@ -65,14 +79,9 @@ print(coffeebar_df['TIMESTAMP'])
 
 coffeebar_df['FOOD'] = coffeebar_df['FOOD'].fillna("none")
 
-ct_time_food = pd.crosstab(coffeebar_df['TIMESTAMP'], coffeebar_df['FOOD'], normalize = 'index')*100
+ct_time_food = pd.crosstab(coffeebar_df['TIMESTAMP'], coffeebar_df['FOOD'], normalize='index')*100
 print(ct_time_food)
 ct_time_food.to_csv(directory + '/Results/Part 1/FoodDist.csv')
-# Observed probabilities:
-# 8-11: 100% none
-# 11-13: 12.5% cookie muffin pie, 62.5% sandwich
-# 13-18: 13.33% (4/30) cookie muffin pie. 60% none
-
 ct_time_food.plot(kind="bar", stacked=True, rot=0)
 
 x_ticks = [0, 12, 24, 36, 66, 96, 111, 126, 141, 156, 171]
@@ -83,7 +92,7 @@ plt.xlabel('Time')
 plt.title('Distribution of Food Sales over Time')
 plt.legend(title='Food Type', loc='lower right')
 
-plt.gcf().set_size_inches(9,6)
+plt.gcf().set_size_inches(9, 6)
 plt.savefig(directory + '/Results/Part 1/FoodDist.png', dpi=300)
 
 # plt.show()
@@ -93,6 +102,7 @@ plt.savefig(directory + '/Results/Part 1/FoodDist.png', dpi=300)
 # 11-13: 12.5% cookie muffin pie, 62.5% sandwich
 # 13-18: 13.33% (4/30) cookie muffin pie. 60% none
 
+# #################################
 # Drinks
 
 ct_time_drinks = pd.crosstab(coffeebar_df['TIMESTAMP'], coffeebar_df['DRINKS'], normalize='index') * 100

@@ -1,24 +1,30 @@
-from typing import List
 
 import pandas as pd
 import datetime as dt
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-import numpy as np
 import os
 import random
-import time
 
-import Functions
 from Classes.Customer import HipsterCustomer, ReturningCustomer
 from Classes.Store import Store
 from Functions import *
 
-# filepath
+# #################################
+# NOTES
+# #################################
+
+# This file is in two parts. First, we run the simulation over 5 years. Second, we compute some additional
+# analysis for part 4. The analysis of the simulation data itself is completed in a separate file.
+#
+# For running the simulation, we state the menus (based on given prices and probabilities from 'Exploratory.py')
+# We then create a returning customer list (1/3 hipsters). We set a random seed and then simulate the 5 years of
+# data. This takes under 3 minutes. We store the ledger in a csv file so that it can be easily accessed later on.
+
+
+# Please run the below line and amend as necessary to set the directory for your computer
 os.path.abspath('.')
 
-# directory = '/Users/justinstandish-white/PycharmProjects/exam-mcdermott-standish-white'
-directory = '/Users/paulmcdermott/PycharmProjects/exam-mcdermott-standish-white'
+directory = '/Users/justinstandish-white/PycharmProjects/exam-mcdermott-standish-white'
+# directory = '/Users/paulmcdermott/PycharmProjects/exam-mcdermott-standish-white'
 
 # Setting up database of times with menu probabilities
 
@@ -52,7 +58,7 @@ coffee_shop = Store(food_menu, drinks_menu, all_returning_list)
 random.seed(7)
 
 # make a list of 5-years worth of days
-date_list = pd.date_range(start="2016-01-01",end="2020-12-31")
+date_list = pd.date_range(start="2016-01-01", end="2020-12-31")
 date_list_2 = list(map(datetime_to_date, date_list))
 
 # for each day, run day of business function
@@ -61,9 +67,14 @@ for i in date_list_2:
 
 # retrieve full 5-year ledger
 df_ledger = coffee_shop.retrieve_ledger()
-df_ledger.to_csv(directory + '/Results/Part 3/SimulationLedger.csv',sep = ",", index=False)
+df_ledger.to_csv(directory + '/Results/Part 3/SimulationLedger.csv', sep=",", index=False)
 df_ledger = pd.read_csv(directory + '/Results/Part 3/SimulationLedger.csv', sep=',')
 print(df_ledger)
+
+# Brief analysis: here we answer the question of how many returning customers are left.
+print(len(all_returning_list))
+# 672 returning customers left, number may change with random variation but set.seed should prevent that.
+# This means that 128 customers were removed for insufficient funds.
 
 ####################
 # Part 4:          #
@@ -88,5 +99,3 @@ for i in date_list_2:
     day_of_business(i, coffee_shop_p4)
 df_ledger_p4 = coffee_shop_p4.retrieve_ledger()
 print(df_ledger_p4)
-
-
