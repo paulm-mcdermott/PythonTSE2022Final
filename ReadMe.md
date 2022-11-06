@@ -20,7 +20,7 @@ For instance, we build several methods into the store class which determine whet
 3. With this structure, we now run simulations by using our minute_of_business function which simulates a possible transaction in a given minute. If a transaction occurs, this outputs the details of it and stores these in the store and the relevant customer. 
 We can then analyse this information after simulating 5 years of activity with this minute-level function as the base. 
 
-4. We explore some extension questions
+4. We explore some extension questions.
 
 ## Getting Started
 
@@ -39,9 +39,13 @@ We can then analyse this information after simulating 5 years of activity with t
 
 3. Functions, this sets up the functions for our simulations. This is part of Part 3.
 
-4. Simulations. This runs the simulations and analyses the results. This completes Part 4.
+4. Simulations. This runs the simulations (Part 3) and contains most of the extension analysis (Part 4).
 
-5. Old Code. This contains some code we didn't end up using but wanted to have for a reference. 
+5. Simulation Analysis. This analyses the simulated data to complete Part 3. 
+
+6. Test. This was created to test a specific feature of our system. It has no directly relevant output for the project.
+
+7. Old Code. This contains some code we didn't end up using but wanted to have for a reference. 
 
 ## Help
 
@@ -52,21 +56,13 @@ command to run if program contains helper info
 
 ## Authors
 
-Contributors names and contact info.
+Contributors names.
 
 ex. Paul McDermott
 ex. Justin Standish-White
 
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
 
-## Version History
 
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
 
 ## License
 
