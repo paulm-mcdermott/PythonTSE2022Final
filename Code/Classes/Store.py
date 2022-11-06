@@ -8,12 +8,14 @@ from Classes.Customer import OneTimeCustomer, TripAdvisorCustomer
 # #################################
 
 # This files introduces the store class that we create to make our simulation more efficient.
-# Stores are initialised with the relevant menus, customer list and customer probabilities
+# Stores are initialised with the relevant menus, returning customer list and customer probabilities
 # We set the probability of a customer entering the store in a given minute as 0.25
 # this is based on the coffeebar data which had 171 customers over 600 minutes per day, so we round off to 0.25
 #
 # Most of the functionality is built into this store class. Including the system to pick type of customer,
-# drink choices, budget checking and the maintaining of a ledger of transactions
+# food and drink choices (split into three time segments of day, based on exploratory,
+# perform the budget checking of returning customers and the trimming of the viable returning customer list
+# and the maintaining of a ledger of transactions
 
 
 class Store(object):

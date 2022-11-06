@@ -6,7 +6,8 @@ import pandas as pd
 # NOTES
 # #################################
 
-# This files introduces the classes for the different types of customers.
+# This files introduces the classes for the different types of customers, defines the initialization, and adds the
+# necessary methods to manage purchase history and determine tip. Of importance, customer type determines budget.
 
 class Customer(object):
     def __init__(self, customer_id, budget):
@@ -14,20 +15,23 @@ class Customer(object):
         self.budget = budget
         self.purchase_history = []
 
-    # this needs to check budget and block if needed, return false if can't, return tip if can (tip can be 0)
+    # updates a customer's budget
     # since we're automatically removing those with insufficient budget we don't have to worry about checking budget
     def update_budget(self, transaction_cost):
         self.budget = self.budget - transaction_cost
 
+    # determines tip
     def determine_tip(self):
         tip = 0
         if isinstance(self, TripAdvisorCustomer):
             tip = random.randint(1, 10)
         return tip
 
+    # adds to purchase history upon transaction
     def add_to_history(self, transaction):
         self.purchase_history.append(transaction)
 
+    # retrieves this customer's purchase history as a dataframe
     def retrieve_purchase_history(self):
         return pd.DataFrame.from_records(self.purchase_history,
                                          columns=['date_time', 'customer_id', 'food_choice', 'drink_choice',
