@@ -1,7 +1,8 @@
 # Coffee Shop Simulations
-## Paul McDermott & Justin Standish-White
+### by Paul McDermott & Justin Standish-White
 
-This project explores the coffeebar dataset and, using insights from analysing that dataset, develops a simulation programme in python. The end objective is to simulate 5 years of transactions for the coffee shop.
+This project explores the coffeebar dataset and, using insights from analysing that dataset, develops a simulation programme in python. 
+The end objective is to simulate 5 years of transactions for the coffee shop.
 
 
 ## Description
@@ -31,7 +32,7 @@ We can then analyse this information after simulating 5 years of activity with t
 
 ### Executing program
 
-* The code should be straightforward to run. Here is an explainer for the files.
+* The code should be straightforward to run. Here is an explainer for the files. Further detail is given in notes at the beginning of each file.
 
 1. Exploratory. This covers Part 1 in its entirety.
 
