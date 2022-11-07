@@ -20,7 +20,8 @@ from Classes.Customer import OneTimeCustomer, TripAdvisorCustomer
 
 class Store(object):
 
-    # store constructor, note the fact that the probabilities have default that can be overrided
+    # store constructor, note the fact that the probabilities have default that can be overrided. also, note that
+    # food menu and drink menu must be dataframes
     def __init__(self, food_menu, drink_menu, ret_cust_list, prob_cust=.25, prob_returning=.2, prob_ta_customer=0.1):
         # TODO: specify types (menus should be dataframes), ret_cust_list is list of ids
         self.food_menu = food_menu

@@ -62,8 +62,3 @@ def datetime_to_date(i):
     return i.date()
 
 
-# Function to grab a specific customer from a list
-def grab_customer(id, customer_list):
-    for i in customer_list:
-        if i.customer_id == id:
-            return i
