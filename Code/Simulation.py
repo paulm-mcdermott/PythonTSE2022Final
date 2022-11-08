@@ -134,12 +134,6 @@ coffee_shop_pt4q4 = Store(food_menu, drinks_menu, all_returning_list_pt4q4)
 for i in dates_pt4q4_1:
     day_of_business(i, coffee_shop_pt4q4)
 
-ledga = coffee_shop_pt4q4.retrieve_ledger()
-print(type(ledga['transaction_value'][0]))
-print(coffee_shop_pt4q4.ledger)
-
-
-
 # update menus
 new_food_prices = coffee_shop_pt4q4.food_menu['price']*1.2
 coffee_shop_pt4q4.food_menu['price'] = new_food_prices
@@ -154,9 +148,8 @@ for i in dates_pt4q4_2:
 # retrieve and print ledger
 df_ledger_pt4q4 = coffee_shop_pt4q4.retrieve_ledger()
 print(df_ledger_pt4q4)
-df_ledger_pt4q4.tail(15)
-print(type(df_ledger_pt4q4['transaction_value'][600000]))
 
+# TODO: figure out this float issue, ledger outputs an int for transaction, we need float
 df_ledger_pt4q4[['food_choice','drink_choice','transaction_value']].tail(15)
 print(coffee_shop_pt4q4.drink_menu)
 print(coffee_shop_pt4q4.food_menu)
@@ -167,5 +160,4 @@ float(coffee_shop_pt4q4.food_menu.loc[coffee_shop_pt4q4.food_menu['food_item'] =
 #############################################################
 # Pt 4 Q5 Hipster budget reduces to 40
 
-
-hipsta = HipsterCustomer('H0',40)
+hipsta = HipsterCustomer('H0',budget=40)
