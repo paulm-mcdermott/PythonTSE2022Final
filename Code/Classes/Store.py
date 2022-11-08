@@ -22,16 +22,16 @@ class Store(object):
 
     # store constructor, note the fact that the probabilities have default that can be overrided. also, note that
     # food menu and drink menu must be dataframes
-    def __init__(self, food_menu, drink_menu, ret_cust_list, prob_cust=.25, prob_returning=.2, prob_ta_customer=0.1):
+    def __init__(self, food_menu, drink_menu, ret_cust_list, prob_cust=None, prob_returning=None, prob_ta_customer=None):
         # TODO: specify types (menus should be dataframes), ret_cust_list is list of ids
         self.food_menu = food_menu
         self.drink_menu = drink_menu
         self.viable_ret_cust = ret_cust_list
         self.ledger = []
         self.walk_ins = []
-        self.prob_cust = prob_cust
-        self.prob_returning = prob_returning
-        self.prob_ta_customer = prob_ta_customer
+        self.prob_cust = prob_cust if prob_cust is not None else .25
+        self.prob_returning = prob_returning if prob_returning is not None else .2
+        self.prob_ta_customer = prob_ta_customer if prob_ta_customer is not None else .1
 
     # adds transaction, a parameter meant to be a list, onto the ledger
     def add_to_ledger(self, transaction):
@@ -68,12 +68,20 @@ class Store(object):
     # if customer_entry determines that a customer will indeed enter, picks which type
     # and returns that corresponding customer object
     def pick_customer_type(self):
+
+        # if no more viable returning customers, then customer type will always be "one-time", else draw a random
+        # number between 0 and 1
         if len(self.viable_ret_cust) == 0:
             type_cust = 1
         else:
             type_cust = random.uniform(0, 1)
+
+        # based on draw, customer can be returning
         if type_cust < self.prob_returning:
             return self.pick_returning_customer()
+
+        # or a walk-in, in which case we instantiate a new "walk-in" customer, type of random customer again
+        # determined by a random draw
         else:
             p_walk_in_type = random.uniform(0, 1)
             if p_walk_in_type <= self.prob_ta_customer:
@@ -87,7 +95,8 @@ class Store(object):
     def pick_returning_customer(self):
         return random.choice(self.viable_ret_cust)
 
-    # picks a food item based on the hour of day, according to probabilities in food_menu
+    # picks a food item based on the hour of day, according to probabilities in food_menu, np.random.choice allows
+    # us to make our own discrete probability function
     def pick_food(self, hour):
         if hour < 11:
             return np.random.choice(list(self.food_menu["food_item"]), 1, p=list(self.food_menu["breakfast_prob"]))[0]

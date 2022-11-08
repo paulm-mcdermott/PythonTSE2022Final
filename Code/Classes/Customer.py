@@ -2,6 +2,7 @@ import random
 
 import pandas as pd
 
+
 # #################################
 # NOTES
 # #################################
@@ -25,7 +26,7 @@ class Customer(object):
         tip = 0
         if isinstance(self, TripAdvisorCustomer):
             tip = random.randint(1, 10)
-        return tip
+        return float(tip)
 
     # adds to purchase history upon transaction
     def add_to_history(self, transaction):
@@ -54,6 +55,6 @@ class ReturningCustomer(Customer):
 
 
 class HipsterCustomer(ReturningCustomer):
-    def __init__(self, customer_id):
+    def __init__(self, customer_id, budget=None):
         super().__init__(customer_id)
-        self.budget = 500
+        self.budget = budget if budget is not None else 500

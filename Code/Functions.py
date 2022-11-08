@@ -27,10 +27,10 @@ def minute_of_business(date_time, store):
         drink_choice = store.pick_drink(hour)
 
         # determine prices and total cost of transaction for customer
-        food_price = int(store.food_menu.loc[store.food_menu['food_item'] == food_choice, "price"])
-        drink_price = int(store.drink_menu.loc[store.drink_menu['drink_item'] == drink_choice, "price"])
+        food_price = float(store.food_menu.loc[store.food_menu['food_item'] == food_choice, "price"])
+        drink_price = float(store.drink_menu.loc[store.drink_menu['drink_item'] == drink_choice, "price"])
 
-        tip = customer.determine_tip()
+        tip = float(customer.determine_tip())
         total_cost = food_price + drink_price + tip
 
         # update customer's budget
@@ -38,7 +38,7 @@ def minute_of_business(date_time, store):
 
         # format store ledger entry
         transaction = [date_time.strftime('%d/%m/%Y, %H:%M:%S'), customer.customer_id, food_choice, drink_choice,
-                       total_cost, tip]
+                       float(total_cost), float(tip)]
 
         # add transaction to store ledger
         store.add_to_ledger(transaction)
