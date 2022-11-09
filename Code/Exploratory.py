@@ -128,3 +128,49 @@ plt.savefig(directory + '/Results/Part 1/DrinksDist.png', dpi=300)
 # 8-11: coffee 1/3, everything else 2/15
 # 11-13: soda = 7/12, everything else 1/12
 # 13-18: all drinks 16.66% (1/6)
+
+####################################
+# Part 4:
+####################################
+
+# We get the number of appearances of each ID
+ret_customers = coffeebar_df['CUSTOMER'].value_counts()
+print(ret_customers.head(5))
+print(ret_customers.tail(5))
+
+# Keep only returning customers, there are 1000 of them
+ret_customers = ret_customers[ret_customers > 1]
+print(len(ret_customers))
+
+# Now, we add this info to the transaction log
+coffeebar_df_ret = coffeebar_df
+coffeebar_df_ret['VISITS'] = coffeebar_df.groupby('CUSTOMER')['CUSTOMER'].transform('count')
+coffeebar_df_ret['RETURNING'] = coffeebar_df_ret['VISITS'] > 1
+print(coffeebar_df_ret.head(10))
+
+# We determine the makeup of the customers at any given time with a graph as above.
+
+ct_time_ret = pd.crosstab(coffeebar_df_ret['TIMESTAMP'], coffeebar_df_ret['RETURNING'], normalize='index') * 100
+print(ct_time_ret)
+
+
+ct_time_ret.plot(kind="bar", stacked=True, rot=0)
+
+x_ticks = [0, 12, 24, 36, 66, 96, 111, 126, 141, 156, 171]
+x_labels = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
+plt.xticks(ticks=x_ticks, labels=x_labels)
+plt.ylabel('Proportion of Returning Customers')
+plt.xlabel('Time')
+plt.title('Distribution of Customer Types over Time')
+plt.legend(['One-Time', 'Returning'], title='Customer Type', loc='lower right')
+
+plt.gcf().set_size_inches(9, 6)
+plt.savefig(directory + '/Results/Part 4/ReturningDist.png', dpi=300)
+
+# We see returning customers make up:
+# 20% of customers in the morning
+# 10% of customers around midday
+# 30% of customers in the afternoon
+
+
+
