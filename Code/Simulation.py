@@ -135,10 +135,10 @@ for i in dates_pt4q4_1:
     day_of_business(i, coffee_shop_pt4q4)
 
 # update menus
-new_food_prices = coffee_shop_pt4q4.food_menu['price']*1.2
+new_food_prices = coffee_shop_pt4q4.food_menu['price'] * 1.2
 coffee_shop_pt4q4.food_menu['price'] = new_food_prices
 
-new_drink_prices = coffee_shop_pt4q4.drink_menu['price']*1.2
+new_drink_prices = coffee_shop_pt4q4.drink_menu['price'] * 1.2
 coffee_shop_pt4q4.drink_menu['price'] = new_drink_prices
 
 # run 2018, 2019, 2020 simulation
@@ -150,7 +150,7 @@ df_ledger_pt4q4 = coffee_shop_pt4q4.retrieve_ledger()
 print(df_ledger_pt4q4)
 
 # TODO: figure out this float issue, ledger outputs an int for transaction, we need float
-df_ledger_pt4q4[['food_choice','drink_choice','transaction_value']].tail(15)
+df_ledger_pt4q4[['food_choice', 'drink_choice', 'transaction_value']].tail(15)
 print(coffee_shop_pt4q4.drink_menu)
 print(coffee_shop_pt4q4.food_menu)
 print(type(coffee_shop_pt4q4.drink_menu['price'][0]))
@@ -160,4 +160,28 @@ float(coffee_shop_pt4q4.food_menu.loc[coffee_shop_pt4q4.food_menu['food_item'] =
 #############################################################
 # Pt 4 Q5 Hipster budget reduces to 40
 
-hipsta = HipsterCustomer('H0',budget=40)
+# new list of 1000 viable customers, this time with all hipsters having a budget of 40
+hipster_list_pt4q5 = [HipsterCustomer("H" + str(i), budget=40) for i in range(1, 334)]
+returning_list_pt4q5 = [ReturningCustomer("R" + str(i)) for i in range(334, 1001)]
+all_returning_list_pt4q5 = returning_list_pt4q5 + hipster_list_pt4q5
+
+# instantiate a store
+coffee_shop_pt4q5 = Store(food_menu, drinks_menu, all_returning_list_pt4q5)
+
+# run simulation, same as before
+for i in date_list_2:
+    day_of_business(i, coffee_shop_pt4q5)
+
+# retrieve and print ledger
+df_ledger_pt4q5 = coffee_shop_pt4q5.retrieve_ledger()
+print(df_ledger_pt4q5)
+
+# we suspect that the last date a hipster customer will visit the store will be much earlier than in
+# the original case. A test simulation: last hipster on 11/05/2017. There will be variance across tests.
+print(df_ledger_pt4q5[df_ledger_pt4q5['customer_id'].str.contains('H')])
+
+#############################################################
+# Pt 4 Q6 Build your own TODO pt 4 q6
+
+
+

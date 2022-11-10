@@ -21,8 +21,8 @@ import os
 
 # load csv into dataframe - Please run the below line and amend as necessary to set the directory for your computer
 os.path.abspath('.')
-# directory = '/Users/paulmcdermott/PycharmProjects/exam-mcdermott-standish-white'
-directory = '/Users/justinstandish-white/PycharmProjects/exam-mcdermott-standish-white'
+directory = '/Users/paulmcdermott/PycharmProjects/exam-mcdermott-standish-white'
+# directory = '/Users/justinstandish-white/PycharmProjects/exam-mcdermott-standish-white'
 coffeebar_df = pd.read_csv(directory + '/Data/Coffeebar_2016-2020.csv', sep=';')
 
 print(coffeebar_df.head(5))
