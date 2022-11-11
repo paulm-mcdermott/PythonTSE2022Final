@@ -70,9 +70,9 @@ df_ledger.to_csv(directory + '/Results/Part 3/SimulationLedger.csv', sep=",", in
 df_ledger = pd.read_csv(directory + '/Results/Part 3/SimulationLedger.csv', sep=',')
 
 # Brief analysis: here we answer the question of how many returning customers are left.
-print(len(all_returning_list))
+print(len(coffee_shop.viable_ret_cust))
 # 672 returning customers left, number may change with random variation but set.seed should prevent that.
-# This means that 128 customers were removed for insufficient funds.
+# This means that 328 customers were removed for insufficient funds.
 
 ####################################
 # Part 4:
@@ -103,11 +103,11 @@ for i in date_list_2:
 df_ledger_p4 = coffee_shop_p4.retrieve_ledger()
 print(df_ledger_p4)
 
-# see all the regular returning customer transactions, including what date the last arrived (one simulation: 14/04/2016,
-# of course this will change in another simulation)
+# see all the regular returning customer transactions, of interest: when the last returning customer arrived (one
+# simulation: 14/04/2016, of course this will change in another simulation)
 print(df_ledger_p4[df_ledger_p4['customer_id'].str.contains('R')])
 
-# see all the hipster returning customer transactions, including what date the last arrived (one simulation:
+# see all the hipster returning customer transactions, of interest: when the last hipster arrived (one simulation:
 # 10/05/2016, about a month after the last regular returning customer, which makes sense due to higher budget)
 print(df_ledger_p4[df_ledger_p4['customer_id'].str.contains('H')])
 
@@ -145,17 +145,13 @@ coffee_shop_pt4q4.drink_menu['price'] = new_drink_prices
 for i in dates_pt4q4_2:
     day_of_business(i, coffee_shop_pt4q4)
 
-# retrieve and print ledger
+# retrieve and print ledger, notice that some transactions now have decimals
 df_ledger_pt4q4 = coffee_shop_pt4q4.retrieve_ledger()
 print(df_ledger_pt4q4)
 
-# TODO: figure out this float issue, ledger outputs an int for transaction, we need float
-df_ledger_pt4q4[['food_choice', 'drink_choice', 'transaction_value']].tail(15)
-print(coffee_shop_pt4q4.drink_menu)
-print(coffee_shop_pt4q4.food_menu)
-print(type(coffee_shop_pt4q4.drink_menu['price'][0]))
-print(type(coffee_shop.drink_menu['price'][0]))
-float(coffee_shop_pt4q4.food_menu.loc[coffee_shop_pt4q4.food_menu['food_item'] == 'Cookie', "price"])
+# we would expect more returning customers to be removed from the list than the baseline simulation case due to higher
+# average prices. Indeed, our test results in 367 remaining, compared to baseline test of 672
+print(len(coffee_shop_pt4q4.viable_ret_cust))
 
 #############################################################
 # Pt 4 Q5 Hipster budget reduces to 40
