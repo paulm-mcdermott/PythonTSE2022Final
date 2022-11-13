@@ -1,4 +1,5 @@
-from Simulation import coffee_shop, date_list_2, food_menu, drinks_menu
+import Simulation
+from Simulation import coffee_shop, date_list_2, food_menu, drinks_menu, hipster_list
 from Classes.Customer import *
 from Classes.Store import *
 from Exploratory import *
@@ -6,6 +7,7 @@ from Functions import *
 import random
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy
 
 ####################################
 # Part 4:
@@ -188,10 +190,55 @@ print(df_ledger_pt4q5)
 print(df_ledger_pt4q5[df_ledger_pt4q5['customer_id'].str.contains('H')])
 
 #############################################################
-# Pt 4 Q6 Build your own TODO pt 4 q6
-# Randomize the budgets of returning and hipster
+# Pt 4 Q6 Build your own
+# Randomize the budgets of hipsters using a normal distribution
 
-# new list of 1000 viable customers, using random integers for the budgets
-hipster_list_pt4q6 = [HipsterCustomer("H" + str(i), budget=random.randint(100, 500)) for i in range(1, 334)]
-returning_list_pt4q6 = [ReturningCustomer("R" + str(i), budget=random.randint(100, 250)) for i in range(334, 1001)]
+# new list of 1000 viable customers, using random numbers pulled from normal distribution (taking absolute value to
+# protect against negatives, so the distribution is now not quite normal). One issue is that some might instantiate
+# with insufficient budget, in which case the customer might have a transaction that pushes them to negative budget.
+# So we will say that they can have debt for this part. Removal from viable list will still work as before.
+hipster_list_pt4q6 = [HipsterCustomer("H" + str(i), budget=abs(numpy.random.normal(loc=300, scale=100))) for i in range(1, 334)]
+returning_list_pt4q6 = [ReturningCustomer("R" + str(i)) for i in range(334, 1001)]
 all_returning_list_pt4q6 = returning_list_pt4q6 + hipster_list_pt4q6
+
+# instantiate a store
+coffee_shop_pt4q6 = Store(food_menu, drinks_menu, all_returning_list_pt4q6)
+
+# run simulation, same as before
+for i in date_list_2:
+    day_of_business(i, coffee_shop_pt4q6)
+
+# retrieve and print ledger
+df_ledger_pt4q6 = coffee_shop_pt4q6.retrieve_ledger()
+print(df_ledger_pt4q6)
+
+# for a brief analysis, collect the post simulation hipster budgets, for both the orignal simulation and part 4 Q6
+# simulation into list
+h_budgets_part4_q6 = []
+h_budgets_simulation = []
+for i in hipster_list_pt4q6:
+    h_budgets_part4_q6.append(i.budget)
+for i in hipster_list:
+    h_budgets_simulation.append(i.budget)
+
+# plot histograms of post simulation hipster budgets. you can see that the histogram from the part 4 Q6 sample in
+# blue 1) has bunching near 0 as expected, but more interestingly 2) lower spread than the histogram from the
+# original simulation. This makes sense because in the original simulation, the budget start as identical (no
+# spread), while the part 4 Q 6 budgets start with spread.
+plt.hist(h_budgets_part4_q6)
+plt.hist(h_budgets_simulation)
+plt.ylabel('Count')
+plt.xlabel('Customer Budget')
+plt.title('Post simulation hipster budgets, Pt4 Q6')
+
+# based on the histogram, we expect that hipster customer would be available from the viable customer list for the
+# full 5 years. We see that this is true.
+print(df_ledger_pt4q6[df_ledger_pt4q6['customer_id'].str.contains('H')])
+
+
+
+
+
+
+
+
