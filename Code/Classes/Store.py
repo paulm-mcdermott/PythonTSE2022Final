@@ -23,7 +23,6 @@ class Store(object):
     # store constructor, note the fact that the probabilities have default that can be overrided. also, note that
     # food menu and drink menu must be dataframes
     def __init__(self, food_menu, drink_menu, ret_cust_list, prob_cust=None, prob_returning=None, prob_ta_customer=None):
-        # TODO: specify types (menus should be dataframes), ret_cust_list is list of ids
         self.food_menu = food_menu
         self.drink_menu = drink_menu
         self.viable_ret_cust = ret_cust_list
@@ -105,7 +104,7 @@ class Store(object):
         else:
             return np.random.choice(list(self.food_menu["food_item"]), 1, p=list(self.food_menu["dinner_prob"]))[0]
 
-    # picks a food item based on the hour of day, according to probabilities in drink_menu
+    # picks a drink item based on the hour of day, according to probabilities in drink_menu
     def pick_drink(self, hour):
         if hour < 11:
             return np.random.choice(list(self.drink_menu["drink_item"]), 1, p=list(self.drink_menu["breakfast_prob"]))[

@@ -50,8 +50,9 @@ class TripAdvisorCustomer(OneTimeCustomer):
 
 
 class ReturningCustomer(Customer):
-    def __init__(self, customer_id):
-        super().__init__(customer_id, 250)
+    def __init__(self, customer_id, budget=None):
+        super().__init__(customer_id)
+        self.budget = budget if budget is not None else 250
 
 
 class HipsterCustomer(ReturningCustomer):
