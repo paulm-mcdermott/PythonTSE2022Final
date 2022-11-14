@@ -4,7 +4,7 @@ from Classes.Store import Store
 from Classes.Customer import *
 from Functions import *
 
-
+# TO RUN THE TEST: run the file
 # experimenting with the test filetype built into PyCharm. This is supplemental to project requirements.
 class store_tests(unittest.TestCase):
     returning_budget = 250
