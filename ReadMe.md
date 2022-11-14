@@ -40,15 +40,13 @@ We can then analyse this information after simulating 5 years of activity with t
 
 3. Functions, this sets up the functions for our simulations. This is part of Part 3.
 
-4. Simulations. This runs the simulations (Part 3) and contains most of the extension analysis (Part 4).
+4. Simulations. This runs the simulations (Part 3)
 
 5. Simulation Analysis. This analyses the simulated data to complete Part 3. 
 
 6. Part 4. This covers Part 4 in its entirety.
 
-7. Test. This was created to test a specific feature of our system. It has no directly relevant output for the project.
-
-8. Old Code. This contains some code we didn't end up using but wanted to have for a reference. 
+7. Test. This was created to test a specific feature of our system. It has no directly relevant output for the project. 
 
 ## Help
 
