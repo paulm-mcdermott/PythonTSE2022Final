@@ -11,8 +11,8 @@ from Functions import *
 # NOTES
 # #################################
 
-# This file is in two parts. First, we run the simulation over 5 years. Second, we compute some additional
-# analysis for part 4. The analysis of the simulation data itself is completed in a separate file.
+# This file runs the simulation for Part 3. We run it over the 5-year period.
+# The analysis is completed in 'SimulationAnalysis.py'
 #
 # For running the simulation, we state the menus (based on given prices and probabilities from 'Exploratory.py')
 # We then create a returning customer list (1/3 hipsters). We set a random seed and then simulate the 5 years of

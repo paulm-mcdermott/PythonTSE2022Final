@@ -9,6 +9,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy
 
+# #################################
+# NOTES
+# #################################
+
+# This file performs the part 4 analysis. We work through each point one by one using the results of the simulation
+# and the given coffeebar dataset when required.
+
+
 ####################################
 # Part 4:
 ####################################
