@@ -44,9 +44,11 @@ We can then analyse this information after simulating 5 years of activity with t
 
 5. Simulation Analysis. This analyses the simulated data to complete Part 3. 
 
-6. Test. This was created to test a specific feature of our system. It has no directly relevant output for the project.
+6. Part 4. This covers Part 4 in its entirety.
 
-7. Old Code. This contains some code we didn't end up using but wanted to have for a reference. 
+7. Test. This was created to test a specific feature of our system. It has no directly relevant output for the project.
+
+8. Old Code. This contains some code we didn't end up using but wanted to have for a reference. 
 
 ## Help
 
