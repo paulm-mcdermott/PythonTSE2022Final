@@ -4,7 +4,6 @@
 This project explores the coffeebar dataset and, using insights from analysing that dataset, develops a simulation programme in python. 
 The end objective is to simulate 5 years of transactions for the coffee shop.
 
-
 ## Description
 
 An in-depth paragraph about your project and overview of use.
@@ -25,11 +24,6 @@ We can then analyse this information after simulating 5 years of activity with t
 
 ## Getting Started
 
-### Dependencies
-
-* This project was set up using Pycharm CE, with a Conda interpreter. We used M1 MacBooks. 
-
-
 ### Executing program
 
 * The code should be straightforward to run. Here is an explainer for the files. Further detail is given in notes at the beginning of each file.
@@ -48,26 +42,17 @@ We can then analyse this information after simulating 5 years of activity with t
 
 7. Test. This was created to test a specific feature of our system. It has no directly relevant output for the project. 
 
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
-
 ## Authors
 
-Contributors names.
-
-ex. Paul McDermott
-ex. Justin Standish-White
+Paul McDermott
+Justin Standish-White
 
 
 
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+This project is licensed under the MIT License - see the LICENSE.md file for details
 
 ## Acknowledgments
 
